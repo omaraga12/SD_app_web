@@ -1,4 +1,4 @@
-package CapaNegocio;
+package Controlador.CapaNegocio;
 
 import CapaNegocio.Entidades.EntidadEmpresa;
 

@@ -6,14 +6,14 @@ package CapaNegocio.Entidades;
  */
 public class EntidadPostulante {
 
-    private int postulante_id, tipo_documento_id, ubigeo_id, pais_id, profesion_categoria, numero_colegiatura;
-    private String numero_documento, apellido_paterno, apellido_materno, nombres, link_foto, contra;
+    private int postulante_id, ubigeo_id, pais_id, profesion_categoria, numero_colegiatura;
+    private String tipo_documento_id, numero_documento, apellido_paterno, apellido_materno, nombres, link_foto, contra;
 
     public EntidadPostulante() {
 
     }
 
-    public EntidadPostulante(int postulante_id, int tipo_documento_id, int ubigeo_id, int pais_id, int profesion_categoria, int numero_colegiatura, String numero_documento, String apellido_paterno, String apellido_materno, String nombres, String link_foto, String contra) {
+    public EntidadPostulante(int postulante_id, String tipo_documento_id, int ubigeo_id, int pais_id, int profesion_categoria, int numero_colegiatura, String numero_documento, String apellido_paterno, String apellido_materno, String nombres, String link_foto, String contra) {
         this.postulante_id = postulante_id;
         this.tipo_documento_id = tipo_documento_id;
         this.ubigeo_id = ubigeo_id;
@@ -36,11 +36,11 @@ public class EntidadPostulante {
         this.postulante_id = postulante_id;
     }
 
-    public int getTipo_documento_id() {
+    public String getTipo_documento_id() {
         return tipo_documento_id;
     }
 
-    public void setTipo_documento_id(int tipo_documento_id) {
+    public void setTipo_documento_id(String tipo_documento_id) {
         this.tipo_documento_id = tipo_documento_id;
     }
 
