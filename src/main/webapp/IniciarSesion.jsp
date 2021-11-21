@@ -32,14 +32,8 @@
                     <form method="POST" id="signup-form" class="signup-form">
                         <h2 class="form-title">Iniciar Sesion</h2>
                         
-                        <h3 class="form-title">Que tipo de usuario eres?</h3>
-                        <div class="form-radio">
-                        <input type="radio" name="member_level" value="newbie" id="newbie" checked="checked" />
-                        <label for="newbie">Empresa</label>
-                        <input type="radio" name="member_level" value="average" id="average" />
-                        <label for="average">Postulante</label>
                         
-                        </div>
+
                         <div class="form-group">
                             <input type="number" class="form-input" name="doc" id="name" placeholder="DNI o RUC"/>
                         </div>

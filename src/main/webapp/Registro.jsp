@@ -19,29 +19,32 @@
     <!-- Main css -->
     
     <link rel="stylesheet" href="./Estilos/Registro.css" type="text/css">
+    
      <%@ include file = "Header.jsp"%>
 </head>
 <body>
+   
  
     <div class="main">
+     
    
         <section class="signup">
             <!-- <img src="images/signup-bg.jpg" alt=""> -->
             <div class="container">
                 <div class="signup-content">
-                    <form method="POST" id="signup-form" class="signup-form">
+                    <form action="RegistroUsuario" method="POST" id="signup-form" class="signup-form">
                         <h2 class="form-title">Crea una Cuenta</h2>
                         <h3 class="form-title">Que tipo de usuario eres?</h3>
                         <div class="form-radio">
-                        <input type="radio" name="member_level" value="newbie" id="newbie" checked="checked" />
+                        <input type="radio" name="type" value="empresa" checked="checked" />
                         <label for="newbie">Empresa</label>
-                        <input type="radio" name="member_level" value="average" id="average" />
+                        <input type="radio" name="type" value="postulante"  />
                         <label for="average">Postulante</label>
                        
                         
                         </div>
                         <div class="form-group">
-                            <input type="number" class="form-input" name="doc" id="name" placeholder="DNI o RUC"/>
+                            <input type="number" class="form-input" name="doc" id="doc" placeholder="DNI o RUC"/>
                         </div>
                         <div class="form-group">
                             <input type="email" class="form-input" name="email" id="email" placeholder="Correo Electronico"/>
@@ -68,7 +71,8 @@
     </div>
 
     <!-- JS -->
-    <script src="vendor/jquery/jquery.min.js"></script>
-    <script src="js/main.js"></script>
+    <!-- <script src="vendor/jquery/jquery.min.js"></script>
+    <script src="js/main.js"></script>-->
+    <script src="js/RegistroUsuario.js"></script>
 </body><!-- This templates was made by Colorlib (https://colorlib.com) -->
 </html>

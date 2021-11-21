@@ -86,7 +86,7 @@ public class conexion {
             sent = con.createStatement();
             sent.executeUpdate(strSQL);
         } catch (Exception e) {
-            throw new Exception ("Error al ejecutar consulta..."+e);
+            System.err.println("Error al ejecutar consulta..."+e);
         } 
     }
     
