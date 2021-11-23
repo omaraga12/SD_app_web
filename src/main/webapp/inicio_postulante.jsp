@@ -55,18 +55,17 @@
                     <div class="card text-center" style="width: 18rem;">
                         <img src="images/postulanteImg.jpg" class="card-img-top" alt="...">
                         <div class="card-body">
-                            <%if(rs.next()){%>
+                            <%if (rs.next()) {%>
                             <h5 class="card-title"><%= rs.getString(1)%></h5>
-                            <%}%>
-                            <h5 class="card-title">Siu</h5>
                             <p class="card-text" style="text-align: justify">
-                                <strong>Tipo documento: </strong>77668981<br>
-                                <strong>País: </strong>Perú<br>
-                                <strong>Departamento: </strong>Lambayeque<br>
-                                <strong>Provincia: </strong>Chiclayo<br>
-                                <strong>Distrito: </strong>Jose leonardo Ortiz<br>
-                                <strong>Número colegiatura: </strong>25<br>
+                                <strong><%= rs.getString(2)%>: </strong><%= rs.getString(3)%><br>
+                                <strong>País: </strong><%= rs.getString(4)%><br>
+                                <strong>Departamento: </strong><%= rs.getString(5)%><br>
+                                <strong>Provincia: </strong><%= rs.getString(6)%><br>
+                                <strong>Distrito: </strong><%= rs.getString(7)%><br>
+                                <strong>Número colegiatura: </strong><%= rs.getString(8)%><br>
                             </p>
+                            <%}%>
                             <a href="#" class="btn btn-primary"><i class="fas fa-cog"></i> Modificar</a>
                         </div>
                     </div>
