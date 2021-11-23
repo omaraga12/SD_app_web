@@ -4,6 +4,8 @@
     Author     : nickb
 --%>
 
+<%@page import="java.sql.ResultSet"%>
+<%@page import="CapaLogica.Postulante"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -15,6 +17,10 @@
         <title>JSP Page</title>
     </head>
     <body>
+        <%
+            Postulante postulante = new Postulante();
+            ResultSet rs = postulante.buscarPostulante(Integer.parseInt(request.getAttribute("idpostulante").toString()));
+        %>
         <div class="container-fluid">
             <nav class="navbar navbar-light bg-light navb">
                 <div class="container-fluid row">
@@ -47,10 +53,20 @@
             <div class="row container-fluid cuerpo">
                 <div class="col-3">
                     <div class="card text-center" style="width: 18rem;">
-                        <img src="images/icono_home.png" class="card-img-top" alt="...">
+                        <img src="images/postulanteImg.jpg" class="card-img-top" alt="...">
                         <div class="card-body">
-                            <h5 class="card-title">${idpostulante}</h5>
-                            <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                            <%if(rs.next()){%>
+                            <h5 class="card-title"><%= rs.getString(1)%></h5>
+                            <%}%>
+                            <h5 class="card-title">Siu</h5>
+                            <p class="card-text" style="text-align: justify">
+                                <strong>Tipo documento: </strong>77668981<br>
+                                <strong>País: </strong>Perú<br>
+                                <strong>Departamento: </strong>Lambayeque<br>
+                                <strong>Provincia: </strong>Chiclayo<br>
+                                <strong>Distrito: </strong>Jose leonardo Ortiz<br>
+                                <strong>Número colegiatura: </strong>25<br>
+                            </p>
                             <a href="#" class="btn btn-primary"><i class="fas fa-cog"></i> Modificar</a>
                         </div>
                     </div>

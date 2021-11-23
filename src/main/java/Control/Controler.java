@@ -7,7 +7,7 @@ package Control;
 
 import CapaNegocio.ExperienciaLaboral;
 import CapaNegocio.Idioma;
-import CapaNegocio.Postulante;
+import CapaLogica.Postulante;
 import CapaNegocio.Profesion;
 import CapaNegocio.Ubigeo;
 import javax.servlet.annotation.WebServlet;

@@ -4,7 +4,7 @@
     Author     : Rodrigo Ruidias
 --%>
 
-<%@page import="CapaNegocio.Postulante"%>
+<%@page import="CapaLogica.Postulante"%>
 <%@page import="CapaNegocio.Entidades.EntidadTipoDocumento"%>
 <%@page import="CapaNegocio.TipoDocumento"%>
 <%@page import="CapaNegocio.Entidades.EntidadCategoriaProfesion"%>
