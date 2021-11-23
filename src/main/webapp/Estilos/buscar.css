@@ -1,0 +1,39 @@
+.navb{
+    padding-top: 0px;
+    background: white !important;
+}
+
+.eleNav{
+    text-align: center;
+}
+
+.iconoNav{
+    font-size: x-large;
+    color: black;
+    margin-bottom: 0px;
+}
+
+.iconoNavSelec{
+    font-size: x-large;
+    color: dodgerblue;
+    margin-bottom: 0px;
+}
+
+.textoNav{
+    color: black;
+    margin-bottom: 0px;
+}
+
+.textoNavSelec{
+    color: dodgerblue;
+    margin-bottom: 0px;
+}
+
+.eleNavSelec{
+    border-top: 3px solid dodgerblue;
+}
+
+.trabajosPostular{
+    overflow-y: scroll;
+    height: 500px;
+}

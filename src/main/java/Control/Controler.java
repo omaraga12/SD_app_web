@@ -10,14 +10,19 @@ import CapaNegocio.Idioma;
 import CapaNegocio.Postulante;
 import CapaNegocio.Profesion;
 import CapaNegocio.Ubigeo;
+import javax.servlet.annotation.WebServlet;
 import java.io.IOException;
 import java.io.PrintWriter;
-import jakarta.servlet.ServletException;
-import jakarta.servlet.annotation.WebServlet;
-import jakarta.servlet.http.HttpServlet;
-import jakarta.servlet.http.HttpServletRequest;
-import jakarta.servlet.http.HttpServletResponse;
+//import jakarta.servlet.ServletException;
+//import jakarta.servlet.annotation.WebServlet;
+//import jakarta.servlet.http.HttpServlet;
+//import jakarta.servlet.http.HttpServletRequest;
+//import jakarta.servlet.http.HttpServletResponse;
 import javax.swing.JOptionPane;
+import javax.servlet.ServletException;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 /**
  *
@@ -103,11 +108,11 @@ public class Controler extends HttpServlet {
                     objEL.setPostulante_id(Integer.parseInt(request.getParameter("idposEx").trim()));
                     objEL.insertarExperiencia(request.getParameter("inputFechaI"), request.getParameter("inputFechaS"));
                     request.setAttribute("idpostulante", request.getParameter("idposEx"));
-                    request.getRequestDispatcher("index.jsp").forward(request, response);
+                    request.getRequestDispatcher("inicio_postulante.jsp").forward(request, response);
                     break;
 
                 default:
-                    request.getRequestDispatcher("index.jsp").forward(request, response);
+                    request.getRequestDispatcher("IniciarSesion.jsp").forward(request, response);
             }
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, e.getMessage() + " Error en accion");
