@@ -1,5 +1,6 @@
 package CapaNegocio.Entidades;
 
+import java.io.InputStream;
 import java.util.Date;
 
 /**
@@ -10,20 +11,20 @@ public class EntidadExperienciaLaboral {
     
     private int experiencia_id, postulante_id, empresa_id;
     private Date fecha_inicio, fecha_final;
-    private String link_archivo, cargo;
+    private String cargo, link_archivo;
     
     public EntidadExperienciaLaboral(){
         
     }
 
-    public EntidadExperienciaLaboral(int experiencia_id, int postulante_id, int empresa_id, Date fecha_inicio, Date fecha_final, String link_archivo, String cargo) {
+    public EntidadExperienciaLaboral(int experiencia_id, int postulante_id, int empresa_id, Date fecha_inicio, Date fecha_final, String cargo, String link_archivo) {
         this.experiencia_id = experiencia_id;
         this.postulante_id = postulante_id;
         this.empresa_id = empresa_id;
         this.fecha_inicio = fecha_inicio;
         this.fecha_final = fecha_final;
-        this.link_archivo = link_archivo;
         this.cargo = cargo;
+        this.link_archivo = link_archivo;
     }
 
     public int getExperiencia_id() {
@@ -66,6 +67,14 @@ public class EntidadExperienciaLaboral {
         this.fecha_final = fecha_final;
     }
 
+    public String getCargo() {
+        return cargo;
+    }
+
+    public void setCargo(String cargo) {
+        this.cargo = cargo;
+    }
+
     public String getLink_archivo() {
         return link_archivo;
     }
@@ -74,13 +83,7 @@ public class EntidadExperienciaLaboral {
         this.link_archivo = link_archivo;
     }
 
-    public String getCargo() {
-        return cargo;
-    }
-
-    public void setCargo(String cargo) {
-        this.cargo = cargo;
-    }
+    
     
     @Override
     public String toString(){

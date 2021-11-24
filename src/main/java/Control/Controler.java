@@ -12,6 +12,7 @@ import CapaNegocio.Profesion;
 import CapaNegocio.Ubigeo;
 import javax.servlet.annotation.WebServlet;
 import java.io.IOException;
+import java.io.InputStream;
 import java.io.PrintWriter;
 //import jakarta.servlet.ServletException;
 //import jakarta.servlet.annotation.WebServlet;
@@ -20,15 +21,18 @@ import java.io.PrintWriter;
 //import jakarta.servlet.http.HttpServletResponse;
 import javax.swing.JOptionPane;
 import javax.servlet.ServletException;
+import javax.servlet.annotation.MultipartConfig;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.Part;
 
 /**
  *
  * @author Rodrigo Ruidias
  */
 @WebServlet(name = "Controler", urlPatterns = {"/Controler"})
+@MultipartConfig
 public class Controler extends HttpServlet {
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
@@ -51,6 +55,7 @@ public class Controler extends HttpServlet {
             String accion = request.getParameter("accion");
             switch (accion) {
                 case "siguientePostulante":
+
                     Postulante objP = new Postulante();
                     objP.setTipo_documento_id(request.getParameter("inputTipo").trim());
                     objP.setNumero_documento(request.getParameter("inputDocumento"));
@@ -69,7 +74,10 @@ public class Controler extends HttpServlet {
                     objP.setProfesion_categoria(Integer.parseInt(request.getParameter("inputProfesionPostulante").trim()));
                     objP.setNumero_colegiatura(Integer.parseInt(request.getParameter("inputColegiatura")));
 
-                    objP.setLink_foto(request.getParameter("inputSeleccionarImagen"));
+                    
+                    Part foto = request.getPart("inputSeleccionarImagen");
+                    InputStream ie = foto.getInputStream();
+                    objP.setLink_foto(ie);
 
                     int idPostulante = objP.insertarPostulante();
                     request.setAttribute("id", idPostulante);
@@ -92,8 +100,8 @@ public class Controler extends HttpServlet {
                     objPro.setCategoria_profesion_id(Integer.parseInt(request.getParameter("cboProfesion").trim()));
                     objPro.setUniversidad_id(Integer.parseInt(request.getParameter("cboUniversidad").trim()));
                     objPro.setDescripcion_formal(request.getParameter("txtDescripcion"));
-                    objPro.setGrado_academico_id(Integer.parseInt(request.getParameter("cboGrado").trim()));
-                    objPro.setUrl_archivo(request.getParameter("btnArchivo"));
+                    objPro.setGrado_academico_id(Integer.parseInt(request.getParameter("cboGrado").trim()));       
+                    objPro.setUrl_archivo(request.getParameter("btnArchivo")); 
                     objPro.setPostulante_id(Integer.parseInt(request.getParameter("idPP")));
                     objPro.insertarProfesion(request.getParameter("txtFecha"));
                     request.setAttribute("idPP", request.getParameter("idPP"));
@@ -102,7 +110,7 @@ public class Controler extends HttpServlet {
 
                 case "finalizarRegistro":
                     ExperienciaLaboral objEL = new ExperienciaLaboral();
-                    objEL.setLink_archivo((request.getParameter("btnSeleccionarArchivo")));
+                    objEL.setLink_archivo((request.getParameter("btnSeleccionarArchivo")));                    
                     objEL.setEmpresa_id(Integer.parseInt(request.getParameter("cboEmpresa").trim()));
                     objEL.setCargo(request.getParameter("cboCargo"));
                     objEL.setPostulante_id(Integer.parseInt(request.getParameter("idposEx").trim()));

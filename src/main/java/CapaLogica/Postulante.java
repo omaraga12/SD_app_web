@@ -37,7 +37,7 @@ public class Postulante extends EntidadPostulante {
                 objEP.setPais_id(rs.getInt(8));
                 objEP.setProfesion_categoria(rs.getInt(9));
                 objEP.setNumero_colegiatura(10);
-                objEP.setLink_foto(rs.getString(11));
+                objEP.setLink_foto(rs.getBinaryStream(11));
             }
             objC.desconectarBD();
             return objEP;

@@ -1,5 +1,7 @@
 package CapaNegocio.Entidades;
 
+import java.io.InputStream;
+
 /**
  *
  * @author Rodrigo Ruidias
@@ -59,7 +61,7 @@ public class EntidadIdioma {
 
     public void setLink_archivo(String link_archivo) {
         this.link_archivo = link_archivo;
-    }
+    }  
 
     @Override
     public String toString() {

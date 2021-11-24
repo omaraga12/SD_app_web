@@ -90,4 +90,8 @@ public class EntidadProfesion {
     public void setFecha_obtencion(Date fecha_obtencion) {
         this.fecha_obtencion = fecha_obtencion;
     }
+
+    
+
+    
 }

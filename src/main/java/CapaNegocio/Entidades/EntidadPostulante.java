@@ -1,5 +1,7 @@
 package CapaNegocio.Entidades;
 
+import java.io.InputStream;
+
 /**
  *
  * @author Rodrigo Ruidias
@@ -7,25 +9,26 @@ package CapaNegocio.Entidades;
 public class EntidadPostulante {
 
     private int postulante_id, ubigeo_id, pais_id, profesion_categoria, numero_colegiatura;
-    private String tipo_documento_id, numero_documento, apellido_paterno, apellido_materno, nombres, link_foto, contra;
+    private String tipo_documento_id, numero_documento, apellido_paterno, apellido_materno, nombres, contra;
+    private InputStream link_foto;
 
     public EntidadPostulante() {
 
     }
 
-    public EntidadPostulante(int postulante_id, String tipo_documento_id, int ubigeo_id, int pais_id, int profesion_categoria, int numero_colegiatura, String numero_documento, String apellido_paterno, String apellido_materno, String nombres, String link_foto, String contra) {
+    public EntidadPostulante(int postulante_id, int ubigeo_id, int pais_id, int profesion_categoria, int numero_colegiatura, String tipo_documento_id, String numero_documento, String apellido_paterno, String apellido_materno, String nombres, String contra, InputStream link_foto) {
         this.postulante_id = postulante_id;
-        this.tipo_documento_id = tipo_documento_id;
         this.ubigeo_id = ubigeo_id;
         this.pais_id = pais_id;
         this.profesion_categoria = profesion_categoria;
         this.numero_colegiatura = numero_colegiatura;
+        this.tipo_documento_id = tipo_documento_id;
         this.numero_documento = numero_documento;
         this.apellido_paterno = apellido_paterno;
         this.apellido_materno = apellido_materno;
         this.nombres = nombres;
-        this.link_foto = link_foto;
         this.contra = contra;
+        this.link_foto = link_foto;
     }
 
     public int getPostulante_id() {
@@ -34,14 +37,6 @@ public class EntidadPostulante {
 
     public void setPostulante_id(int postulante_id) {
         this.postulante_id = postulante_id;
-    }
-
-    public String getTipo_documento_id() {
-        return tipo_documento_id;
-    }
-
-    public void setTipo_documento_id(String tipo_documento_id) {
-        this.tipo_documento_id = tipo_documento_id;
     }
 
     public int getUbigeo_id() {
@@ -76,6 +71,14 @@ public class EntidadPostulante {
         this.numero_colegiatura = numero_colegiatura;
     }
 
+    public String getTipo_documento_id() {
+        return tipo_documento_id;
+    }
+
+    public void setTipo_documento_id(String tipo_documento_id) {
+        this.tipo_documento_id = tipo_documento_id;
+    }
+
     public String getNumero_documento() {
         return numero_documento;
     }
@@ -108,21 +111,23 @@ public class EntidadPostulante {
         this.nombres = nombres;
     }
 
-    public String getLink_foto() {
-        return link_foto;
-    }
-
-    public void setLink_foto(String link_foto) {
-        this.link_foto = link_foto;
-    }
-
     public String getContra() {
         return contra;
     }
 
     public void setContra(String contra) {
         this.contra = contra;
-    }  
+    }
+
+    public InputStream getLink_foto() {
+        return link_foto;
+    }
+
+    public void setLink_foto(InputStream link_foto) {
+        this.link_foto = link_foto;
+    }
+
+    
 
     @Override
     public String toString() {

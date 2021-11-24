@@ -47,7 +47,7 @@
             <div class = "row mt-5">
                 <div class = "col">
                     <h1 class="text-primary"><center>Registro de postulante</center></h1>
-                    <form action="Controler" method="POST" id="data" class = "row mt-5">
+                    <form action="Controler" method="POST" id="data" class = "row mt-5" enctype="multipart/form-data">
                         <div class = "col-6">
                             <div class="mb-3">
                                 <label for="inputDocumento" class="form-label">N° documento</label>
