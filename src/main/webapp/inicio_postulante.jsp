@@ -19,7 +19,10 @@
     <body>
         <%
             Postulante postulante = new Postulante();
-            ResultSet rs = postulante.buscarPostulante(Integer.parseInt(request.getAttribute("idpostulante").toString()));
+            ResultSet rs = null;
+            Object rq = request.getAttribute("idpostulante");
+            if(rq!=null){
+                rs = postulante.buscarPostulante(Integer.parseInt(request.getAttribute("idpostulante").toString()));
         %>
         <div class="container-fluid">
             <nav class="navbar navbar-light bg-light navb">
@@ -103,5 +106,10 @@
                 </div>
             </div>
         </div>
+        <%
+            }else{
+                request.getRequestDispatcher("IniciarSesion.jsp").forward(request, response);
+            }
+        %>
     </body>
 </html>
