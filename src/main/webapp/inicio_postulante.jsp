@@ -22,18 +22,18 @@
         <%
             Postulante postulante = new Postulante();
             ResultSet rs = null;
-            int post_id = 759;
+            int post_id = 0;
             Object rq = request.getAttribute("idpostulante");
-            //if(rq!=null){
-                rs = postulante.buscarPostulante(post_id/*Integer.parseInt(request.getAttribute("idpostulante").toString())*/);
-              //  post_id = Integer.parseInt(request.getAttribute("idpostulante").toString());
+            if(rq!=null){
+                rs = postulante.buscarPostulante(Integer.parseInt(request.getAttribute("idpostulante").toString()));
+                post_id = Integer.parseInt(request.getAttribute("idpostulante").toString());
         %>
         <div class="container-fluid">
             
             <nav class="navbar navbar-light bg-light navb">
                 <div class="container-fluid row">
                     <div class="container col-4 eleNav eleNavSelec">
-                        <a class="navbar-brand" href="inicio_postulante.jsp">
+                        <a class="navbar-brand" href="inicio_postulante.jsp?idpostulante=<%=post_id%>">
                             <span class="iconoNavSelec"">
                                 <i class="fas fa-home"></i>
                             </span><br>
@@ -129,9 +129,9 @@
             </div>
         </div>
         <%
-            //}else{
-              //  request.getRequestDispatcher("IniciarSesion.jsp").forward(request, response);
-            //}
+            }else{
+                request.getRequestDispatcher("IniciarSesion.jsp").forward(request, response);
+            }
         %>
     </body>
 </html>
