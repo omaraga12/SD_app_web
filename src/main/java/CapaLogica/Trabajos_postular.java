@@ -21,7 +21,7 @@ public class Trabajos_postular {
     ArrayList<String> SQLs = new ArrayList<>();
     
     public ResultSet consultarTrabajosPostular(int postulante_id) throws Exception{
-        SQL = "select trabajo_postular_id, nombre, estado, em.nombre_empresa, tp.descripcion, cp.descripcion as profesion, tipo_trabajo, imagen from trabajos_postular tp "
+        SQL = "select trabajo_postular_id, nombre, estado, em.nombre_empresa, tp.descripcion, cp.descripcion as profesion, tipo_trabajo, em.imagen from trabajos_postular tp "
                 + "inner join Empresa em on tp.empresa_id = em.empresa_id inner join Categoria_profesion cp on tp.categoria_profesion_id = cp.categoria_id "
                 + "where cp.categoria_id = (select categoria_profesion_categoria from Postulante where postulante_id = "+postulante_id+") and tp.trabajo_postular_id not in " 
                 + "(select tpo.trabajo_postular_id from trabajo_postulante tpo where tpo.postulante_id = "+postulante_id+")";
@@ -39,8 +39,9 @@ public class Trabajos_postular {
         if(consult_empresa.next()){
             int empresa_id = consult_empresa.getInt(1);
             SQLs.add("insert into trabajo_postulante values(" + trabajo_id + ", " + postulante_id + ");");
-            SQLs.add("insert into notificaciones_postulante(empresa_id, postulante_id, mensaje) values("
-                    +empresa_id+", "+postulante_id+", 'Su postulación se ha registrado correctamente, con mucho gusto revisaremos su perfil');");
+            SQLs.add("insert into notificaciones_postulante(empresa_id, postulante_id, mensaje, trabajo_postular_id) values("
+                    + empresa_id + ", " + postulante_id + ", 'Su postulación se ha registrado correctamente, con mucho gusto "
+                    + "revisaremos su perfil, gracias por postular a nuestro trabajo.', "+trabajo_id+");");
             try {
                 objC.ejecutarBDTransacciones(SQLs);
             } catch (Exception e) {
