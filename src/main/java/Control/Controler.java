@@ -141,7 +141,22 @@ public class Controler extends HttpServlet {
                     int postulante_id = Integer.parseInt(request.getParameter("id_postul"));
                     tp.registrar_trabajo_postulante(trabajo_id, postulante_id);
                     request.setAttribute("idpostulante", postulante_id);
+                    request.getRequestDispatcher("notificaciones.jsp").forward(request, response);
+                    break;
+                    
+                case "irInicioPostulante":
+                    request.setAttribute("idpostulante", request.getParameter("id_postul1"));
                     request.getRequestDispatcher("inicio_postulante.jsp").forward(request, response);
+                    break;
+                    
+                case "irBuscarTrabajosPost":
+                    request.setAttribute("idpostulante", request.getParameter("id_postul2"));
+                    request.getRequestDispatcher("buscar.jsp").forward(request, response);
+                    break;
+                    
+                case "irNotificacionesPost":
+                    request.setAttribute("idpostulante", request.getParameter("id_postul3"));
+                    request.getRequestDispatcher("notificaciones.jsp").forward(request, response);
                     break;
                     
                 default:

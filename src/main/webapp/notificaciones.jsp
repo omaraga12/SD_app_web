@@ -4,6 +4,8 @@
     Author     : nickb
 --%>
 
+<%@page import="java.sql.ResultSet"%>
+<%@page import="CapaLogica.Postulante"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -15,32 +17,50 @@
         <title>JSP Page</title>
     </head>
     <body>
+        <%
+            Postulante postulante = new Postulante();
+            ResultSet rs = null;
+            int post_id = 0;
+            Object rq = request.getAttribute("idpostulante");
+            if (rq != null) {
+                rs = postulante.buscarPostulante(Integer.parseInt(request.getAttribute("idpostulante").toString()));
+                post_id = Integer.parseInt(request.getAttribute("idpostulante").toString());
+        %>
         <div class="container-fluid">
             <nav class="navbar navbar-light bg-light navb">
                 <div class="container-fluid row">
                     <div class="container col-4 eleNav">
-                        <a class="navbar-brand" href="inicio_postulante.jsp"">
-                            <span class="iconoNav"">
-                                <i class="fas fa-home"></i>
-                            </span><br>
-                            <p class="textoNav"">Inicio</p>
-                        </a>
+                        <form action="Controler" method="post">
+                            <input type="hidden" name="id_postul1" value=<%=post_id%>>
+                            <button class="navbar-brand" style="background: white; border: none" type="submit" name="accion" value="irInicioPostulante">
+                                <span class="iconoNav"">
+                                    <i class="fas fa-home"></i>
+                                </span><br>
+                                <p class="textoNav"">Inicio</p>
+                            </button>
+                        </form>
                     </div>
                     <div class="container col-4 eleNav">
-                        <a class="navbar-brand" href="buscar.jsp"">
-                            <span class="iconoNav"">
-                                <i class="fas fa-search"></i>
-                            </span><br>
-                            <p class="textoNav"">Buscar</p>
-                        </a>
+                        <form action="Controler" method="post">
+                            <input type="hidden" name="id_postul2" value=<%=post_id%>>
+                            <button class="navbar-brand" style="background: white; border: none" type="submit" name="accion" value="irBuscarTrabajosPost"">
+                                <span class="iconoNav"">
+                                    <i class="fas fa-search"></i>
+                                </span><br>
+                                <p class="textoNav"">Buscar</p>
+                            </button>
+                        </form>
                     </div>
                     <div class="container col-4 eleNav eleNavSelec">
-                        <a class="navbar-brand" href="notificaciones.jsp"">
-                            <span class="iconoNavSelec"">
-                                <i class="far fa-bell"></i>
-                            </span><br>
-                            <p class="textoNavSelec"">Notificaciones</p>
-                        </a>
+                        <form action="Controler" method="post">
+                            <input type="hidden" name="id_postul3" value=<%=post_id%>>
+                            <button class="navbar-brand" style="background: white; border: none" type="submit" name="accion" value="irNotificacionesPost"">
+                                <span class="iconoNavSelec"">
+                                    <i class="far fa-bell"></i>
+                                </span><br>
+                                <p class="textoNavSelec"">Notificaciones</p>
+                            </button>
+                        </form>
                     </div> 
                 </div>
             </nav>
@@ -72,5 +92,10 @@
                 </div>
             </div>
         </div>
+        <%
+            } else {
+                request.getRequestDispatcher("IniciarSesion.jsp").forward(request, response);
+            }
+        %>
     </body>
 </html>
