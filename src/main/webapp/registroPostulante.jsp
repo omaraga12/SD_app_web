@@ -36,7 +36,7 @@
                 })
             }
         </script>
-        <title>Registro de postulante</title>
+        <title>Registro del postulante</title>
     </head>
     <body>
         <%
