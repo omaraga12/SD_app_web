@@ -4,6 +4,7 @@
     Author     : Rodrigo Ruidias
 --%>
 
+<%@page import="CapaDatos.conexion"%>
 <%@page import="CapaNegocio.Idioma"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -52,10 +53,9 @@
                         <input type="hidden" name="idpos" id="idpos" value="${id}">
 
                         <div class="col-12 text-center mt-3">
-                            <a href="index.jsp" type="button" class="btn btn-danger">Cancelar</a>
+                            <a href="IniciarSesion.jsp" type="button" class="btn btn-danger">Cancelar</a>
                             <button type="submit" name="accion" value="siguienteIdioma" class="btn btn-primary">Siguiente</button>
                         </div>
-
                     </form>
                 </div>
             </div>

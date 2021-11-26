@@ -67,7 +67,7 @@
                         <input type="hidden" name="idposEx" id="idposEx" value="${idPP}">
 
                         <div class="col-12 text-center mt-3">
-                            <a href="index.jsp" type="button" class="btn btn-danger">Cancelar</a>
+                            <a href="IniciarSesion.jsp" type="button" class="btn btn-danger">Cancelar</a>
                             <button type="submit" name="accion" value="finalizarRegistro" class="btn btn-primary">Finalizar</button>
                         </div>
                     </form>

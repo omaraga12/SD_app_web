@@ -192,7 +192,7 @@
                         </div>
 
                         <div class = "col-12 text-center mt-3">
-                            <a href="index.jsp" type="button" class="btn btn-danger">Cancelar</a>
+                            <a href="IniciarSesion.jsp" type="button" class="btn btn-danger">Cancelar</a>
                             <button type="submit" name="accion" value="siguientePostulante" class="btn btn-primary">Siguiente</button>                            
                         </div>
                     </form>

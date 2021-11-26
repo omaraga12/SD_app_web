@@ -3,6 +3,7 @@ package CapaLogica;
 import CapaDatos.conexion;
 import CapaNegocio.Entidades.EntidadPostulante;
 import java.sql.ResultSet;
+import javax.servlet.http.HttpServletResponse;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 
@@ -37,7 +38,7 @@ public class Postulante extends EntidadPostulante {
                 objEP.setPais_id(rs.getInt(8));
                 objEP.setProfesion_categoria(rs.getInt(9));
                 objEP.setNumero_colegiatura(10);
-                objEP.setLink_foto(rs.getBinaryStream(11));
+                objEP.setLink_foto(rs.getString(11));
             }
             objC.desconectarBD();
             return objEP;
@@ -86,7 +87,7 @@ public class Postulante extends EntidadPostulante {
         try {
             SQL = "select p.postulante_id, p.apellido_parterno + ' ' + p.apellido_materno as apellidos, p.nombres, p.numero_colegiatura, u.departamento, pa.nombre_pais from dbo.Postulante as p inner join dbo.Ubigeo as u on u.ubigeo_id = p.ubigeo_ubigeo_id inner join dbo.Pais as pa on pa.pais_id = p.pais_pais_id order by 2, 3 asc";
             rs = objC.consultarBD(SQL);
-            
+
             DefaultTableModel modelo = new DefaultTableModel();
             modelo.addColumn("ID");
             modelo.addColumn("Apellidos");
@@ -94,73 +95,73 @@ public class Postulante extends EntidadPostulante {
             modelo.addColumn("Colegiatura");
             modelo.addColumn("Departamento");
             modelo.addColumn("País");
-            
+
             tblListado.setModel(modelo);
-            
-            while(rs.next()){
+
+            while (rs.next()) {
                 Object datos[] = new Object[modelo.getColumnCount()];
                 for (int i = 0; i < datos.length; i++) {
-                    datos[i] = rs.getString(i+1);
+                    datos[i] = rs.getString(i + 1);
                 }
-                
+
                 modelo.addRow(datos);
-            }            
+            }
             objC.desconectarBD();
         } catch (Exception e) {
             throw new Exception(e.getMessage());
         }
     }
-    
+
     public int verificarLogin(String dni, String contraseña) throws Exception {
-        int rpt=0;
+        int rpt = 0;
         try {
-            
-            SQL = "select * from postulante where numero_documento = '"+dni+"' and contraseña='"+contraseña+"'";
+
+            SQL = "select * from postulante where numero_documento = '" + dni + "' and contraseña='" + contraseña + "'";
             rs = objC.consultarBD(SQL);
             if (rs.next()) {
-                rpt=rs.getInt(1);
-            }objC.desconectarBD();
-           
+                rpt = rs.getInt(1);
+            }
+            objC.desconectarBD();
+
         } catch (Exception e) {
             throw new Exception(e.getMessage());
         }
         return rpt;
     }
-    
-    public ResultSet busquedaFiltradaPostulantePorNombre( String busqueda) throws Exception{
-        String filtro="%"+busqueda+"%";
-        SQL="select p.postulante_id, p.apellido_parterno + ' ' + p.apellido_materno as apellidos, p.nombres, p.numero_colegiatura, u.departamento, pa.nombre_pais from dbo.Postulante as p inner join dbo.Ubigeo as u on u.ubigeo_id = p.ubigeo_ubigeo_id inner join dbo.Pais as pa on pa.pais_id = p.pais_pais_id where UPPER(p.nombres) like UPPER('"+filtro+"')";
+
+    public ResultSet busquedaFiltradaPostulantePorNombre(String busqueda) throws Exception {
+        String filtro = "%" + busqueda + "%";
+        SQL = "select p.postulante_id, p.apellido_parterno + ' ' + p.apellido_materno as apellidos, p.nombres, p.numero_colegiatura, u.departamento, pa.nombre_pais from dbo.Postulante as p inner join dbo.Ubigeo as u on u.ubigeo_id = p.ubigeo_ubigeo_id inner join dbo.Pais as pa on pa.pais_id = p.pais_pais_id where UPPER(p.nombres) like UPPER('" + filtro + "')";
         try {
-            rs=objC.consultarBD(SQL);
-            return rs;
-        } catch (Exception e) {
-            throw new Exception(e.getMessage());
-        }
-    }
-    
-    public ResultSet busquedaFiltradaPostulantePorPais( String busqueda) throws Exception{
-        String filtro="%"+busqueda+"%";
-        SQL="select p.postulante_id, p.apellido_parterno + ' ' + p.apellido_materno as apellidos, p.nombres, p.numero_colegiatura, u.departamento, pa.nombre_pais from dbo.Postulante as p inner join dbo.Ubigeo as u on u.ubigeo_id = p.ubigeo_ubigeo_id inner join dbo.Pais as pa on pa.pais_id = p.pais_pais_id where UPPER(pa.nombre_pais) like UPPER('"+filtro+"')";
-        try {
-            rs=objC.consultarBD(SQL);
-            return rs;
-        } catch (Exception e) {
-            throw new Exception(e.getMessage());
-        }
-    }
-    
-    public ResultSet buscarPostulante(int id_postulante) throws Exception{
-        SQL = "select apellido_parterno+' '+apellido_materno+' '+pos.nombres as nom_postulante, tpd.nombres as tipo_doc, numero_documento, pa.nombre_pais, "
-                +"ub.departamento, ub.provincia, ub.distrito, numero_colegiatura, link_foto "
-                + "from Postulante pos inner join tipo_documento tpd on pos.tipo_documento_id = tpd.tipo_documento_id inner join pais pa "
-                + "on pos.pais_pais_id = pa.pais_id inner join Ubigeo ub on pos.ubigeo_ubigeo_id = ub.ubigeo_id where postulante_id = " + id_postulante + ";";
-        try{
             rs = objC.consultarBD(SQL);
             return rs;
-        }catch(Exception e){
+        } catch (Exception e) {
             throw new Exception(e.getMessage());
         }
     }
-    
-}
 
+    public ResultSet busquedaFiltradaPostulantePorPais(String busqueda) throws Exception {
+        String filtro = "%" + busqueda + "%";
+        SQL = "select p.postulante_id, p.apellido_parterno + ' ' + p.apellido_materno as apellidos, p.nombres, p.numero_colegiatura, u.departamento, pa.nombre_pais from dbo.Postulante as p inner join dbo.Ubigeo as u on u.ubigeo_id = p.ubigeo_ubigeo_id inner join dbo.Pais as pa on pa.pais_id = p.pais_pais_id where UPPER(pa.nombre_pais) like UPPER('" + filtro + "')";
+        try {
+            rs = objC.consultarBD(SQL);
+            return rs;
+        } catch (Exception e) {
+            throw new Exception(e.getMessage());
+        }
+    }
+
+    public ResultSet buscarPostulante(int id_postulante) throws Exception {
+        SQL = "select apellido_parterno+' '+apellido_materno+' '+pos.nombres as nom_postulante, tpd.nombres as tipo_doc, numero_documento, pa.nombre_pais, "
+                + "ub.departamento, ub.provincia, ub.distrito, numero_colegiatura "
+                + "from Postulante pos inner join tipo_documento tpd on pos.tipo_documento_id = tpd.tipo_documento_id inner join pais pa "
+                + "on pos.pais_pais_id = pa.pais_id inner join Ubigeo ub on pos.ubigeo_ubigeo_id = ub.ubigeo_id where postulante_id = " + id_postulante + ";";
+        try {
+            rs = objC.consultarBD(SQL);
+            return rs;
+        } catch (Exception e) {
+            throw new Exception(e.getMessage());
+        }
+    }
+
+}

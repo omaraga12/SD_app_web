@@ -9,14 +9,13 @@ import java.io.InputStream;
 public class EntidadPostulante {
 
     private int postulante_id, ubigeo_id, pais_id, profesion_categoria, numero_colegiatura;
-    private String tipo_documento_id, numero_documento, apellido_paterno, apellido_materno, nombres, contra;
-    private InputStream link_foto;
+    private String tipo_documento_id, numero_documento, apellido_paterno, apellido_materno, nombres, contra, link_foto;
 
     public EntidadPostulante() {
 
     }
 
-    public EntidadPostulante(int postulante_id, int ubigeo_id, int pais_id, int profesion_categoria, int numero_colegiatura, String tipo_documento_id, String numero_documento, String apellido_paterno, String apellido_materno, String nombres, String contra, InputStream link_foto) {
+    public EntidadPostulante(int postulante_id, int ubigeo_id, int pais_id, int profesion_categoria, int numero_colegiatura, String tipo_documento_id, String numero_documento, String apellido_paterno, String apellido_materno, String nombres, String contra, String link_foto) {
         this.postulante_id = postulante_id;
         this.ubigeo_id = ubigeo_id;
         this.pais_id = pais_id;
@@ -119,11 +118,11 @@ public class EntidadPostulante {
         this.contra = contra;
     }
 
-    public InputStream getLink_foto() {
+    public String getLink_foto() {
         return link_foto;
     }
 
-    public void setLink_foto(InputStream link_foto) {
+    public void setLink_foto(String link_foto) {
         this.link_foto = link_foto;
     }
 

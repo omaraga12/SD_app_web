@@ -11,15 +11,14 @@ import CapaLogica.Postulante;
 import CapaLogica.Trabajos_postular;
 import CapaNegocio.Profesion;
 import CapaNegocio.Ubigeo;
-import javax.servlet.annotation.WebServlet;
+import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.PrintWriter;
-//import jakarta.servlet.ServletException;
-//import jakarta.servlet.annotation.WebServlet;
-//import jakarta.servlet.http.HttpServlet;
-//import jakarta.servlet.http.HttpServletRequest;
-//import jakarta.servlet.http.HttpServletResponse;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import javax.servlet.annotation.WebServlet;
 import javax.swing.JOptionPane;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.MultipartConfig;
@@ -58,6 +57,23 @@ public class Controler extends HttpServlet {
                 case "siguientePostulante":
 
                     Postulante objP = new Postulante();
+                    
+                    String ruta = request.getServletContext().getRealPath("images/");
+                    String cambio = ruta.replace("SD_app_web\\target\\SD_app_web-1.0-SNAPSHOT", "SD_app_web\\src\\main\\webapp");
+                    File uploads = new File(cambio);
+                    JOptionPane.showMessageDialog(null, uploads.toPath());
+
+                    Part part = request.getPart("inputSeleccionarImagen");
+                    Path path = Paths.get(part.getSubmittedFileName());
+                    String fileName = path.getFileName().toString();
+
+                    InputStream input = part.getInputStream();
+
+                    if (input != null) {
+                        File file = new File(uploads, fileName);
+                        Files.copy(input, file.toPath());
+                    }
+
                     objP.setTipo_documento_id(request.getParameter("inputTipo").trim());
                     objP.setNumero_documento(request.getParameter("inputDocumento"));
                     objP.setApellido_paterno(request.getParameter("inputApellidoPaterno"));
@@ -75,17 +91,16 @@ public class Controler extends HttpServlet {
                     objP.setProfesion_categoria(Integer.parseInt(request.getParameter("inputProfesionPostulante").trim()));
                     objP.setNumero_colegiatura(Integer.parseInt(request.getParameter("inputColegiatura")));
 
-                    
-                    Part foto = request.getPart("inputSeleccionarImagen");
-                    InputStream ie = foto.getInputStream();
-                    objP.setLink_foto(ie);
+                    objP.setLink_foto(fileName);
 
                     int idPostulante = objP.insertarPostulante();
                     request.setAttribute("id", idPostulante);
+                    
                     request.getRequestDispatcher("registroIdioma.jsp").forward(request, response);
                     break;
 
                 case "siguienteIdioma":
+
                     Idioma objI = new Idioma();
                     objI.setIdioma(request.getParameter("cboIdioma"));
                     objI.setNivel(request.getParameter("cboNivel"));
@@ -101,8 +116,8 @@ public class Controler extends HttpServlet {
                     objPro.setCategoria_profesion_id(Integer.parseInt(request.getParameter("cboProfesion").trim()));
                     objPro.setUniversidad_id(Integer.parseInt(request.getParameter("cboUniversidad").trim()));
                     objPro.setDescripcion_formal(request.getParameter("txtDescripcion"));
-                    objPro.setGrado_academico_id(Integer.parseInt(request.getParameter("cboGrado").trim()));       
-                    objPro.setUrl_archivo(request.getParameter("btnArchivo")); 
+                    objPro.setGrado_academico_id(Integer.parseInt(request.getParameter("cboGrado").trim()));
+                    objPro.setUrl_archivo(request.getParameter("btnArchivo"));
                     objPro.setPostulante_id(Integer.parseInt(request.getParameter("idPP")));
                     objPro.insertarProfesion(request.getParameter("txtFecha"));
                     request.setAttribute("idPP", request.getParameter("idPP"));
@@ -111,7 +126,7 @@ public class Controler extends HttpServlet {
 
                 case "finalizarRegistro":
                     ExperienciaLaboral objEL = new ExperienciaLaboral();
-                    objEL.setLink_archivo((request.getParameter("btnSeleccionarArchivo")));                    
+                    objEL.setLink_archivo((request.getParameter("btnSeleccionarArchivo")));
                     objEL.setEmpresa_id(Integer.parseInt(request.getParameter("cboEmpresa").trim()));
                     objEL.setCargo(request.getParameter("cboCargo"));
                     objEL.setPostulante_id(Integer.parseInt(request.getParameter("idposEx").trim()));
