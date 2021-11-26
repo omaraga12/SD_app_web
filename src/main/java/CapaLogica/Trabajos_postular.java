@@ -7,6 +7,7 @@ package CapaLogica;
 
 import CapaDatos.conexion;
 import java.sql.ResultSet;
+import java.util.ArrayList;
 
 /**
  *
@@ -17,6 +18,7 @@ public class Trabajos_postular {
     conexion objC = new conexion();
     String SQL = null;
     ResultSet rs = null;
+    ArrayList<String> SQLs = new ArrayList<>();
     
     public ResultSet consultarTrabajosPostular(int postulante_id) throws Exception{
         SQL = "select trabajo_postular_id, nombre, estado, em.nombre_empresa, tp.descripcion, cp.descripcion as profesion, tipo_trabajo, imagen from trabajos_postular tp "
@@ -31,6 +33,30 @@ public class Trabajos_postular {
         }
     }
     
+    public void registrar_trabajo_postulante(int trabajo_id, int postulante_id) throws Exception{
+        SQLs.clear();
+        ResultSet consult_empresa = consultarEmpresaTrabajo(trabajo_id);
+        if(consult_empresa.next()){
+            int empresa_id = consult_empresa.getInt(1);
+            SQLs.add("insert into trabajo_postulante values(" + trabajo_id + ", " + postulante_id + ");");
+            SQLs.add("insert into notificaciones_postulante(empresa_id, postulante_id, mensaje) values("
+                    +empresa_id+", "+postulante_id+", 'Su postulación se ha registrado correctamente, con mucho gusto revisaremos su perfil');");
+            try {
+                objC.ejecutarBDTransacciones(SQLs);
+            } catch (Exception e) {
+                throw new Exception(e.getMessage());
+            }
+        }   
+    }
     
+    public ResultSet consultarEmpresaTrabajo(int trabajo_id) throws Exception{
+        SQL = "select empresa_id from trabajos_postular where trabajo_postular_id = "+trabajo_id;
+        try {
+            rs = objC.consultarBD(SQL);
+            return rs;
+        } catch (Exception e) {
+            throw new Exception(e.getMessage());
+        }
+    }
     
 }

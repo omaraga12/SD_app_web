@@ -22,18 +22,18 @@
         <%
             Postulante postulante = new Postulante();
             ResultSet rs = null;
-            int post_id = 0;
+            int post_id = 759;
             Object rq = request.getAttribute("idpostulante");
-            if(rq!=null){
-                rs = postulante.buscarPostulante(Integer.parseInt(request.getAttribute("idpostulante").toString()));
-                post_id = Integer.parseInt(request.getAttribute("idpostulante").toString());
+            //if(rq!=null){
+                rs = postulante.buscarPostulante(post_id/*Integer.parseInt(request.getAttribute("idpostulante").toString())*/);
+              //  post_id = Integer.parseInt(request.getAttribute("idpostulante").toString());
         %>
         <div class="container-fluid">
             
             <nav class="navbar navbar-light bg-light navb">
                 <div class="container-fluid row">
                     <div class="container col-4 eleNav eleNavSelec">
-                        <a class="navbar-brand" href="inicio_postulante.jsp"">
+                        <a class="navbar-brand" href="inicio_postulante.jsp">
                             <span class="iconoNavSelec"">
                                 <i class="fas fa-home"></i>
                             </span><br>
@@ -89,7 +89,7 @@
                                 while (rsTp.next()) {
                                     if (rsTp.getString(3).equals("1")) {
                             %>
-                            <form>
+                            <form action="Controler" method="post">
                                 <div class="card">
                                     <input type="hidden" name="id_trabajo" value=<%=rsTp.getString(1)%>>
                                     <input type="hidden" name="id_postul" value=<%=post_id%>>
@@ -116,7 +116,7 @@
                                                 %>
                                         </ul>
                                         </p>
-                                        <button class="btn btn-primary" type="submit">Postular</button>
+                                        <button class="btn btn-primary" type="submit" name="accion" value="registrar_trabajo_postulante">Postular</button>
                                     </div>
                                 </div><br>
                             </form>
@@ -129,9 +129,9 @@
             </div>
         </div>
         <%
-            }else{
-                request.getRequestDispatcher("IniciarSesion.jsp").forward(request, response);
-            }
+            //}else{
+              //  request.getRequestDispatcher("IniciarSesion.jsp").forward(request, response);
+            //}
         %>
     </body>
 </html>

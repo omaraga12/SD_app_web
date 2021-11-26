@@ -8,6 +8,7 @@ package Control;
 import CapaNegocio.ExperienciaLaboral;
 import CapaNegocio.Idioma;
 import CapaLogica.Postulante;
+import CapaLogica.Trabajos_postular;
 import CapaNegocio.Profesion;
 import CapaNegocio.Ubigeo;
 import javax.servlet.annotation.WebServlet;
@@ -118,7 +119,16 @@ public class Controler extends HttpServlet {
                     request.setAttribute("idpostulante", request.getParameter("idposEx"));
                     request.getRequestDispatcher("inicio_postulante.jsp").forward(request, response);
                     break;
-
+                    
+                case "registrar_trabajo_postulante":
+                    Trabajos_postular tp = new Trabajos_postular();
+                    int trabajo_id = Integer.parseInt(request.getParameter("id_trabajo"));
+                    int postulante_id = Integer.parseInt(request.getParameter("id_postul"));
+                    tp.registrar_trabajo_postulante(trabajo_id, postulante_id);
+                    request.setAttribute("idpostulante", postulante_id);
+                    request.getRequestDispatcher("inicio_postulante.jsp").forward(request, response);
+                    break;
+                    
                 default:
                     request.getRequestDispatcher("IniciarSesion.jsp").forward(request, response);
             }
