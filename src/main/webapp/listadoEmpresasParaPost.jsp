@@ -39,7 +39,7 @@
                                 <div class="col-6">
                                     <input class="btn btn-primary" type="submit" value="Buscar">
                                     <a class="btn btn-primary active" href="">Agregar</a>
-                                    <a class="btn btn-primary" href="listarEmpresasParaPost.jsp"><img src="images/loop.png" alt=""/></a>
+                                    <a class="btn btn-primary" href="listadoEmpresasParaPost.jsp"><img src="images/loop.png" alt=""/></a>
                                 </div>
                             </div>
                         </form>
