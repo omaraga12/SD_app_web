@@ -78,11 +78,18 @@
                     <div class="card" style="width: 18rem;">
                         <div class="card-body">
                             <p>Buscar:</p>
-                            <input class="form-control" id="txtbuscar" type="text" style="width: 100%;" onkeyup="buscarTrabajosPorNombreTrabajo()"><br>
-                            <input class="btn btn-primary" type="submit" value="Buscar" style="width: 100%"><br><br>
+                            <input class="form-control" id="txtbuscar" type="text" style="width: 100%;" onkeyup="buscarTrabajosPorNombreTrabajo()" placeholder="Nombre trabajo"><br>
+                            <p>Tipo trabajo:</p>
+                            <select class="form-select" style="width: 100%;" id="cboTipoTrabajo" onchange="buscarTrabajosPorTipo()">
+                                <option>Todos</option>
+                                <option>Remoto</option>
+                                <option>Oficina</option>
+                            </select><br>
+                            <p>Empresa:</p>
                             <select class="form-select" style="width: 100%;">
-                                <option>HOla1</option>
-                                <option>HOla2</option>
+                                <option>Todas</option>
+                                <option>Remoto</option>
+                                <option>Oficina</option>
                             </select>
                         </div>
                     </div>
@@ -93,6 +100,7 @@
                             int id = 0;
                             while (rsTp.next()) {
                                 if (rsTp.getString(3).equals("1")) {
+                                    id++;
                         %>
                         <form action="Controler" method="post" id="trabajo<%=id%>">
                             <div class="card">
@@ -106,9 +114,9 @@
                                         <strong>Descripción:</strong>
                                         <%= rsTp.getString(5)%><br>
                                         <strong>Empresa:</strong>
-                                        <%= rsTp.getString(4)%><br>
+                                        <strong style="font-weight: normal" id="nomEmpresa<%=id%>"><%= rsTp.getString(4)%></strong><br>
                                         <strong>Tipo de trabajo:</strong>
-                                        <%= rsTp.getString(7)%><br>
+                                        <strong style="font-weight: normal" id="tipoTrabajo<%=id%>"><%= rsTp.getString(7)%></strong><br>
                                         <strong>Perfil ideal:</strong>
                                     <ul>
                                         <%

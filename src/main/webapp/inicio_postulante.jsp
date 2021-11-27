@@ -16,11 +16,11 @@
         <%
             Postulante postulante = new Postulante();
             ResultSet rs = null;
-            int post_id = 0;
+            int post_id = 777;
             Object rq = request.getAttribute("idpostulante");
-            if(rq!=null){
-                rs = postulante.buscarPostulante(Integer.parseInt(request.getAttribute("idpostulante").toString()));
-                post_id = Integer.parseInt(request.getAttribute("idpostulante").toString());
+            //if(rq!=null){
+                rs = postulante.buscarPostulante(777/*Integer.parseInt(request.getAttribute("idpostulante").toString())*/);
+                //post_id = Integer.parseInt(request.getAttribute("idpostulante").toString());
         %>
         <div class="container-fluid">
             <nav class="navbar navbar-light bg-light navb">
@@ -131,9 +131,9 @@
             </div>
         </div>
         <%
-            }else{
-                request.getRequestDispatcher("IniciarSesion.jsp").forward(request, response);
-            }
+            //}else{
+              //  request.getRequestDispatcher("IniciarSesion.jsp").forward(request, response);
+            //}
         %>
     </body>
 </html>
