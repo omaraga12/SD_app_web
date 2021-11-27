@@ -61,8 +61,6 @@ public class Controler extends HttpServlet {
                     String ruta = request.getServletContext().getRealPath("images/");
                     String cambio = ruta.replace("SD_app_web\\target\\SD_app_web-1.0-SNAPSHOT", "SD_app_web\\src\\main\\webapp");
                     File uploads = new File(cambio);
-                    JOptionPane.showMessageDialog(null, uploads.toPath());
-
                     Part part = request.getPart("inputSeleccionarImagen");
                     Path path = Paths.get(part.getSubmittedFileName());
                     String fileName = path.getFileName().toString();

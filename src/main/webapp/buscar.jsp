@@ -16,17 +16,24 @@
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
         <script src="https://kit.fontawesome.com/357f9dcbc4.js" crossorigin="anonymous"></script>
         <link href="Estilos/buscar.css" rel="stylesheet" type="text/css"/>
+        <script src="js/buscar_trabajos_postulante.js" type="text/javascript"></script>
         <title>JSP Page</title>
     </head>
     <body>
         <%
             Postulante postulante = new Postulante();
             ResultSet rs = null;
+            ResultSet rsTp = null;
             int post_id = 0;
             Object rq = request.getAttribute("idpostulante");
             if (rq != null) {
                 rs = postulante.buscarPostulante(Integer.parseInt(request.getAttribute("idpostulante").toString()));
-                post_id = Integer.parseInt(request.getAttribute("idpostulante").toString());
+                    post_id = Integer.parseInt(request.getAttribute("idpostulante").toString());
+                    Trabajos_postular tp = new Trabajos_postular();
+                    rsTp = tp.consultarTrabajosPostular(post_id);
+                    String estado = "Disponible";
+                    Requisitos_trabajo rt = new Requisitos_trabajo();
+                    int trabajo_id = 0;
         %>
         <div class="container-fluid">
             <nav class="navbar navbar-light bg-light navb">
@@ -71,8 +78,8 @@
                     <div class="card" style="width: 18rem;">
                         <div class="card-body">
                             <p>Buscar:</p>
-                            <input class="form-control" type="text" style="width: 100%;"><br>
-                            <a href="#" class="btn btn-primary" style="width: 100%;">Buscar</a><br><br>
+                            <input class="form-control" id="txtbuscar" type="text" style="width: 100%;" onkeyup="buscarTrabajosPorNombreTrabajo()"><br>
+                            <input class="btn btn-primary" type="submit" value="Buscar" style="width: 100%"><br><br>
                             <select class="form-select" style="width: 100%;">
                                 <option>HOla1</option>
                                 <option>HOla2</option>
@@ -81,21 +88,17 @@
                     </div>
                 </div>
                 <div class="col-9">
-                    <div class="trabajosPostular">
+                    <div class="trabajosPostular" id="datos">
                         <%
-                            Trabajos_postular tp = new Trabajos_postular();
-                            ResultSet rsTp = tp.consultarTrabajosPostular(post_id);
-                            String estado = "Disponible";
-                            Requisitos_trabajo rt = new Requisitos_trabajo();
-                            int trabajo_id = 0;
+                            int id = 0;
                             while (rsTp.next()) {
                                 if (rsTp.getString(3).equals("1")) {
                         %>
-                        <form action="Controler" method="post">
+                        <form action="Controler" method="post" id="trabajo<%=id%>">
                             <div class="card">
                                 <input type="hidden" name="id_trabajo" value=<%=rsTp.getString(1)%>>
                                 <input type="hidden" name="id_postul" value=<%=post_id%>>
-                                <h5 class="card-header"><%= rsTp.getString(2)%></h5>
+                                <h5 class="card-header" id="nomTrabajo<%=id%>"><%= rsTp.getString(2)%></h5>
                                 <img src="images/img_trabajo.jpg" class="card-img-top" alt="..." height="300">
                                 <div class="card-body">
                                     <h5 class="card-title">Categoria: <%= rsTp.getString(6)%></h5><br>

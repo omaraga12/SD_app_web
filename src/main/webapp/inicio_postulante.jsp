@@ -16,11 +16,11 @@
         <%
             Postulante postulante = new Postulante();
             ResultSet rs = null;
-            int post_id = 777;
+            int post_id = 0;
             Object rq = request.getAttribute("idpostulante");
-            //if(rq!=null){
-                rs = postulante.buscarPostulante(777/*Integer.parseInt(request.getAttribute("idpostulante").toString())*/);
-                //post_id = Integer.parseInt(request.getAttribute("idpostulante").toString());
+            if(rq!=null){
+                rs = postulante.buscarPostulante(Integer.parseInt(request.getAttribute("idpostulante").toString()));
+                post_id = Integer.parseInt(request.getAttribute("idpostulante").toString());
         %>
         <div class="container-fluid">
             <nav class="navbar navbar-light bg-light navb">
@@ -63,9 +63,9 @@
             <div class="row container-fluid cuerpo">
                 <div class="col-3">
                     <div class="card text-center" style="width: 18rem;">
-                        <img src="images/postulanteImg.jpg" class="card-img-top" alt="...">
+                        <%if (rs.next()) {%>
+                        <img src="images/<%=rs.getString(9)%>" class="card-img-top" alt="...">
                         <div class="card-body">
-                            <%if (rs.next()) {%>
                             <h5 class="card-title"><%= rs.getString(1)%></h5>
                             <p class="card-text" style="text-align: justify">
                                 <strong><%= rs.getString(2)%>: </strong><%= rs.getString(3)%><br>
@@ -131,9 +131,9 @@
             </div>
         </div>
         <%
-            //}else{
-                //request.getRequestDispatcher("IniciarSesion.jsp").forward(request, response);
-            //}
+            }else{
+                request.getRequestDispatcher("IniciarSesion.jsp").forward(request, response);
+            }
         %>
     </body>
 </html>

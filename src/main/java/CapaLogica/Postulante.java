@@ -153,7 +153,7 @@ public class Postulante extends EntidadPostulante {
 
     public ResultSet buscarPostulante(int id_postulante) throws Exception {
         SQL = "select apellido_parterno+' '+apellido_materno+' '+pos.nombres as nom_postulante, tpd.nombres as tipo_doc, numero_documento, pa.nombre_pais, "
-                + "ub.departamento, ub.provincia, ub.distrito, numero_colegiatura "
+                + "ub.departamento, ub.provincia, ub.distrito, numero_colegiatura, link_foto "
                 + "from Postulante pos inner join tipo_documento tpd on pos.tipo_documento_id = tpd.tipo_documento_id inner join pais pa "
                 + "on pos.pais_pais_id = pa.pais_id inner join Ubigeo ub on pos.ubigeo_ubigeo_id = ub.ubigeo_id where postulante_id = " + id_postulante + ";";
         try {
