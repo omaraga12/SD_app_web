@@ -1,0 +1,11 @@
+.text-tittle{
+    color: white;
+    font-size: 30px;
+    text-decoration: none;
+    padding-bottom: 5px;
+    border-bottom: 2px solid transparent;
+}
+a:hover{
+    border-bottom: 5px solid white;
+    color: white;
+}
