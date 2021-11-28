@@ -107,5 +107,14 @@ public class Empresa extends EntidadEmpresa{
         }
     }
     
-
+    public ResultSet consultarEmpresa() throws Exception{
+        SQL = "select nombre_empresa from Empresa";
+        try {
+            rs=objC.consultarBD(SQL);
+            return rs;
+        } catch (Exception e) {
+            throw new Exception(e.getMessage());
+        }
+    }
+    
 }

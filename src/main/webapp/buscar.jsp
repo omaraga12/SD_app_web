@@ -4,6 +4,7 @@
     Author     : nickb
 --%>
 
+<%@page import="CapaNegocio.Empresa"%>
 <%@page import="CapaLogica.Requisitos_trabajo"%>
 <%@page import="CapaLogica.Trabajos_postular"%>
 <%@page import="java.sql.ResultSet"%>
@@ -86,10 +87,17 @@
                                 <option>Oficina</option>
                             </select><br>
                             <p>Empresa:</p>
-                            <select class="form-select" style="width: 100%;">
+                            <select class="form-select" style="width: 100%;" id="cboEmpresa" onchange="buscarNombreEmpresa()">
                                 <option>Todas</option>
-                                <option>Remoto</option>
-                                <option>Oficina</option>
+                                <%
+                                    Empresa em = new Empresa();
+                                    ResultSet cEm = em.consultarEmpresa();
+                                    while(cEm.next()){
+                                %>
+                                    <option><%= cEm.getString(1)%></option>
+                                <%
+                                    }
+                                %>
                             </select>
                         </div>
                     </div>
