@@ -10,12 +10,27 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
-        <link href="Estilos/listado.css" rel="stylesheet" type="text/css"/>
-        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
-        <link href="Estilos/" rel="stylesheet" type="text/css"/>
-        <title>MENU DE EMPRESAS</title>
+        <link href="Estilos/MenuListadoEmp.css" rel="stylesheet" type="text/css"/>
+        <title>MENU DE LISTADO DE EMPRESAS</title>
     </head>
     <body>
-        
+        <div class="container">
+            <div class="row mt-5 justify-content-center align-items-center">
+                
+            <div class="col-sm-4 mt-5">
+                <div class="card text-center">
+                    <div class="card-body">
+                        <h5 class="card-title mt-5">Empresas</h5>
+                        <p class="card-text mt-3">Puedes ver a todas las empresas y sus datos en un listado.</p>
+                        <div>
+                            <img class="mt-3" src="images/emp_rm.png" alt="alt"/>
+                        </div>
+                        <a href="listadoEmpresasParaPost.jsp" class="btn btn-primary mt-5 col-sm-4">Listar Datos</a>
+                    </div>
+                </div>
+            </div>
+         
+        </div> 
+        </div>
     </body>
 </html>
