@@ -18,14 +18,15 @@ public class Usuario {
     String SQL;
     ResultSet rs = null;
 
-    public Usuario() {
+    public  Usuario() {
         objC = new conexion();
     }
     public static void main(String[] args) {
                
         try {
             Usuario obj= new Usuario();
-            obj.RegistrarUsuario("omar@hotmail.com", "1234", 1);
+            obj.agregarIDPostulanteEmpresa(1, 781);
+            
         } catch (Exception ex) {
             System.err.println(ex);
         }
@@ -48,20 +49,37 @@ public class Usuario {
             throw new Exception(e.getMessage());
         }
     }
-        
-    public int verificarLogin(String correo, String contraseña) throws Exception {
-        int rpt=0;
-        try {
+    
+        public int agregarIDPostulanteEmpresa(int idUser, int idPostulanteEmpresa) throws Exception {
             
-            SQL = "select * from usuario where correo = '"+correo+"' and contrasena='"+contraseña+"'";
-            rs = objC.consultarBD(SQL);
+        try {
+            SQL = "update usuario set id_postulante_empresa="+idPostulanteEmpresa+" where id="+idUser+"";
+            objC.ejecutarBD(SQL);
+            String SQL2 = "select IDENT_CURRENT('usuario') [id]";
+            rs = objC.consultarBD(SQL2);
             if (rs.next()) {
-                rpt=rs.getInt(1);
-            }objC.desconectarBD();
-           
+                return rs.getInt(1);
+                
+            }
+            objC.desconectarBD();
+            return -1;
         } catch (Exception e) {
             throw new Exception(e.getMessage());
         }
-        return rpt;
+    }
+
+    
+    public ResultSet verificarLogin(String correo, String contraseña) throws Exception {
+        
+        try {
+            
+            SQL = "select * from usuario where correo ='"+correo+"' and contrasena='"+contraseña+"'";
+            rs = objC.consultarBD(SQL);
+            return rs;
+           
+        } catch (Exception e) {
+            System.err.println("ERROR"+e);
+        }
+        return null;
     }
 }

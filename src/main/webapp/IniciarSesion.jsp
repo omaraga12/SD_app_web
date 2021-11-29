@@ -19,23 +19,23 @@
     <!-- Main css -->
     
     <link rel="stylesheet" href="./Estilos/Registro.css" type="text/css">
-     <%@ include file = "Header.jsp"%>
+    
 </head>
 <body>
-
+    <span  class="error">${message}</span>
     <div class="main">
 
         <section class="signup">
             <!-- <img src="images/signup-bg.jpg" alt=""> -->
             <div class="container">
                 <div class="signup-content">
-                    <form method="POST" id="signup-form" class="signup-form">
+                    <form method="POST" action="IniciarSesion" id="signup-form" class="signup-form">
                         <h2 class="form-title">Iniciar Sesion</h2>
                         
                         
 
-                        <div class="form-group">
-                            <input type="number" class="form-input" name="doc" id="name" placeholder="DNI o RUC"/>
+                       <div class="form-group">
+                            <input type="email" class="form-input" name="email" id="email" placeholder="Correo Electronico"/>
                         </div>
                        
                         <div class="form-group">

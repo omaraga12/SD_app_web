@@ -20,7 +20,7 @@
     
     <link rel="stylesheet" href="./Estilos/Registro.css" type="text/css">
     
-     <%@ include file = "Header.jsp"%>
+    
 </head>
 <body>
    
@@ -58,7 +58,7 @@
                         </div>
                        
                         <div class="form-group">
-                            <input type="submit" name="submit" id="submit" class="form-submit" value="Registrarse"/>
+                            <input type="submit" name="submit" id="submit" class="form-submit" value="Siguiente"/>
                         </div>
                     </form>
                     <p class="loginhere">

@@ -9,6 +9,7 @@ import CapaNegocio.ExperienciaLaboral;
 import CapaNegocio.Idioma;
 import CapaLogica.Postulante;
 import CapaLogica.Trabajos_postular;
+import CapaLogica.Usuario;
 import CapaNegocio.Profesion;
 import CapaNegocio.Ubigeo;
 import java.io.File;
@@ -71,6 +72,7 @@ public class Controler extends HttpServlet {
                         File file = new File(uploads, fileName);
                         Files.copy(input, file.toPath());
                     }
+                    String idUser=request.getParameter("iduser");
 
                     objP.setTipo_documento_id(request.getParameter("inputTipo").trim());
                     objP.setNumero_documento(request.getParameter("inputDocumento"));
@@ -92,6 +94,8 @@ public class Controler extends HttpServlet {
                     objP.setLink_foto(fileName);
 
                     int idPostulante = objP.insertarPostulante();
+                    Usuario objUser=new Usuario();
+                    objUser.agregarIDPostulanteEmpresa(Integer.parseInt(idUser), idPostulante);
                     request.setAttribute("id", idPostulante);
                     
                     request.getRequestDispatcher("registroIdioma.jsp").forward(request, response);

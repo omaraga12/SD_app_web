@@ -7,8 +7,8 @@ package Servlet;
 import CapaLogica.Usuario;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+import java.sql.ResultSet;
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -18,7 +18,7 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author DELL
  */
-public class RegistroUsuario extends HttpServlet {
+public class IniciarSesion extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -35,44 +35,52 @@ public class RegistroUsuario extends HttpServlet {
         PrintWriter out = response.getWriter();
         
         
-        String tipoSeleccion=request.getParameter("type");
+      
         
         String correo=request.getParameter("email");
-        String contrasena=request.getParameter("re_password");
-        int tipo=1;
-        if(tipoSeleccion.equalsIgnoreCase("empresa")){
-            tipo=1;
-        }else{tipo=0;}
+        String contrasena=request.getParameter("password");
+        
+      
       
         
         Usuario obj= new Usuario();
+        String id=null;
+        String tipo=null;
+        
         try {
-            int idUser=obj.RegistrarUsuario(correo, contrasena, tipo);
-            if(idUser!=-1){
-                //response.sendRedirect("IniciarSesion.jsp");
-                
-                if(tipo==0){
-                    
-                    request.setAttribute("iduser", idUser);
-                    
-                    //response.sendRedirect("inicio_postulante.jsp");
-                    request.getRequestDispatcher("registroPostulante.jsp").forward(request, response);
-                }else{
-                    request.setAttribute("idempresa", idUser);
-                    request.getRequestDispatcher("registroEmpresa.jsp").forward(request, response);
-                }
+            ResultSet rpt=obj.verificarLogin(correo, contrasena);
+            while(rpt.next()){
+             
+                //id=rpt.getString("id_postulante_empresa");
+                id="781";
+                tipo=rpt.getString("tipo");
+            }
+            
            
-            }else{
-                request.setAttribute("message", "Error en el registro, intenta otra vez");
-                request.getRequestDispatcher("Registro.jsp").forward(request, response);
+           if(id!=null){
+                if(tipo.equalsIgnoreCase("0")){
+                    
+                    request.setAttribute("idpostulante", id);
+                    out.print(id);
+                    //response.sendRedirect("inicio_postulante.jsp");
+                    request.getRequestDispatcher("inicio_postulante.jsp").forward(request, response);
+                }else{
+                    request.setAttribute("idempresa", id);
+                    request.getRequestDispatcher("inicio_empresa.jsp").forward(request, response);
+                }
                 
+                //out.print(tipo);
+           
+           }else{
+                //out.print(id);
+                //response.sendRedirect("IniciarSesion.jsp");
+                 request.setAttribute("message", "Datos de acceso incorrectos, intenta otra vez"); // Make available by ${message} in request scope.
+                 request.getRequestDispatcher("IniciarSesion.jsp").forward(request, response);
             };
         } catch (Exception ex) {
             System.err.println(ex);
-            out.print(ex);
+            out.print(ex.getMessage());
         }
-                
-        
        
     }
 

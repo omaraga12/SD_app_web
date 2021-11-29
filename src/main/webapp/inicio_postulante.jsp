@@ -18,6 +18,7 @@
             ResultSet rs = null;
             int post_id = 0;
             Object rq = request.getAttribute("idpostulante");
+            System.err.println(rq);
             if(rq!=null){
                 rs = postulante.buscarPostulante(Integer.parseInt(request.getAttribute("idpostulante").toString()));
                 post_id = Integer.parseInt(request.getAttribute("idpostulante").toString());
@@ -132,6 +133,7 @@
         </div>
         <%
             }else{
+
                 request.getRequestDispatcher("IniciarSesion.jsp").forward(request, response);
             }
         %>
