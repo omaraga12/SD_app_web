@@ -5,6 +5,7 @@
 package CapaLogica;
 
 import CapaDatos.conexion;
+import CapaDatos.encoder;
 import java.sql.ResultSet;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -33,9 +34,10 @@ public class Usuario {
         
     }
         public int RegistrarUsuario(String correo, String contrasena, int tipo) throws Exception {
-            
+            encoder encriptacion=new encoder();
+            String contrasenaEncriptada=encriptacion.ecnode(contrasena);
         try {
-            SQL = "insert into usuario(correo, contrasena, tipo) values('"+correo+"', '"+contrasena+"', "+tipo+")";
+            SQL = "insert into usuario(correo, contrasena, tipo) values('"+correo+"', '"+contrasenaEncriptada+"', "+tipo+")";
             objC.ejecutarBD(SQL);
             String SQL2 = "select IDENT_CURRENT('usuario') [id]";
             rs = objC.consultarBD(SQL2);
@@ -70,10 +72,11 @@ public class Usuario {
 
     
     public ResultSet verificarLogin(String correo, String contraseña) throws Exception {
-        
+        encoder encriptacion=new encoder();
+        String contrasenaEncriptada=encriptacion.ecnode(contraseña);
         try {
             
-            SQL = "select * from usuario where correo ='"+correo+"' and contrasena='"+contraseña+"'";
+            SQL = "select * from usuario where correo ='"+correo+"' and contrasena='"+contrasenaEncriptada+"'";
             rs = objC.consultarBD(SQL);
             return rs;
            
