@@ -63,16 +63,19 @@ public class Controler extends HttpServlet {
                     String cambio = ruta.replace("SD_app_web\\target\\SD_app_web-1.0-SNAPSHOT", "SD_app_web\\src\\main\\webapp");
                     File uploads = new File(cambio);
                     Part part = request.getPart("inputSeleccionarImagen");
+                    
                     Path path = Paths.get(part.getSubmittedFileName());
                     String fileName = path.getFileName().toString();
-
                     InputStream input = part.getInputStream();
-
+                    
                     if (input != null) {
                         File file = new File(uploads, fileName);
-                        Files.copy(input, file.toPath());
+                        if (!Files.exists(file.toPath())) {
+                            Files.copy(input, file.toPath());
+                        }
                     }
                     String idUser=request.getParameter("iduser");
+                    JOptionPane.showMessageDialog(null, idUser);
 
                     objP.setTipo_documento_id(request.getParameter("inputTipo").trim());
                     objP.setNumero_documento(request.getParameter("inputDocumento"));
@@ -165,7 +168,7 @@ public class Controler extends HttpServlet {
                     request.getRequestDispatcher("IniciarSesion.jsp").forward(request, response);
             }
         } catch (Exception e) {
-            JOptionPane.showMessageDialog(null, e.getMessage() + " Error en accion");
+            JOptionPane.showMessageDialog(null, e.getMessage() + " | " + e.getLocalizedMessage() + " | " + e.getCause() + " | Error en accion");
         }
     }
 
