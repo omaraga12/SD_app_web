@@ -12,6 +12,10 @@
         <servlet-name>IniciarSesion</servlet-name>
         <servlet-class>Servlet.IniciarSesion</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>RegistrarEmpresa</servlet-name>
+        <servlet-class>Servlet.RegistrarEmpresa</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>InicioSesion</servlet-name>
         <url-pattern>/InicioSesion</url-pattern>
@@ -23,6 +27,10 @@
     <servlet-mapping>
         <servlet-name>IniciarSesion</servlet-name>
         <url-pattern>/IniciarSesion</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>RegistrarEmpresa</servlet-name>
+        <url-pattern>/RegistrarEmpresa</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

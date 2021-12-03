@@ -46,20 +46,20 @@
 			</div>
 		</div>
 	<div class="row">
-            <form action="/registrarEmpresa">
+            <form action="/RegistrarEmpresa">
     
             <div class="mb-3 mt-3">
                <label for="txtRuc" class="form-label">RUC:</label>
 
                    <div class="d-flex d-flex justify-content-between">
-                            <input type="text" class="form-control" style="width: 450px;"  placeholder="Ingrese el RUC de su empresa" name="txtRuc">
+                       <input type="number" id="ruc" name="ruc" class="form-control" style="width: 450px;"  placeholder="Ingrese el RUC de su empresa" name="txtRuc">
                             <button class="btn btn-primary" style="width: 150px;" onclick="obtnerDatosRuc();">SUNAT</button>
                    </div>
              </div>
 
              <div class="mb-3">
                <label for="txtNombre" class="form-label">Nombre:</label>
-               <input type="text" class="form-control" id="txtNombre" placeholder="Ingrese el nombre de la empresa" >
+               <input type="text" id="nombre" name="nombre"  class="form-control" id="txtNombre" placeholder="Ingrese el nombre de la empresa" >
              </div>
 
              <div class="mb-3">
@@ -72,7 +72,7 @@
             <div class="mb-3">
                <label for="txtNombre" class="form-label">Tipo :</label>
            <div class="input-group mb-3">
-             <select class="form-select" id="inputGroupSelect01">
+             <select id="tipo" name="tipo"  class="form-select" id="inputGroupSelect01">
                <option selected>SAC</option>
                <option value="1">SAA</option>
                <option value="2">EIRL</option>
@@ -83,7 +83,7 @@
 
             <div class="mb-3">
          <label for="txtNombre" class="form-label">Pais :</label>
-           <select name="inputPais" class="form-select" required="required">
+           <select id="pais" name="pais" class="form-select" required="required">
                                     
                                     <%
                                         try {
