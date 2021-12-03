@@ -34,8 +34,11 @@ public class IniciarSesion extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         PrintWriter out = response.getWriter();
         
-        
-      
+         String tipoSeleccion=request.getParameter("type");
+         int tip=1;
+        if(tipoSeleccion.equalsIgnoreCase("admin")){
+            tip=1;
+        }else{tip=0;}
         
         String correo=request.getParameter("email");
         String contrasena=request.getParameter("password");
@@ -46,8 +49,8 @@ public class IniciarSesion extends HttpServlet {
         Usuario obj= new Usuario();
         String id=null;
         String tipo=null;
-        
-        try {
+        if(tip!=1){
+               try {
             ResultSet rpt=obj.verificarLogin(correo, contrasena);
             while(rpt.next()){
              
@@ -56,31 +59,46 @@ public class IniciarSesion extends HttpServlet {
                 tipo=rpt.getString("tipo");
             }
             
+
+            if(id!=null){
+                 if(tipo.equalsIgnoreCase("0")){
+
+                     request.setAttribute("idpostulante", id);
+                     out.print(id);
+                     //response.sendRedirect("inicio_postulante.jsp");
+                     request.getRequestDispatcher("inicio_postulante.jsp").forward(request, response);
+                 }else{
+                     request.setAttribute("idempresa", id);
+                     request.getRequestDispatcher("inicio_empresa.jsp").forward(request, response);
+                 }
+
+                 //out.print(tipo);
+
+            }else{
+                 //out.print(id);
+                 //response.sendRedirect("IniciarSesion.jsp");
+                  request.setAttribute("message", "Datos de acceso incorrectos, intenta otra vez"); // Make available by ${message} in request scope.
+                  request.getRequestDispatcher("IniciarSesion.jsp").forward(request, response);
+             };
+         } catch (Exception ex) {
+             System.err.println(ex);
+             out.print(ex.getMessage());
+         }
+        }else{
+            
+            if(correo.equalsIgnoreCase("admin@gmail.com") && contrasena.equalsIgnoreCase("1234")){
+                 
+
+                 response.sendRedirect("MenuListado.jsp");
+            }else{
+                 //out.print(id);
+                 //response.sendRedirect("IniciarSesion.jsp");
+                  request.setAttribute("message", "Datos de acceso incorrectos, intenta otra vez"); // Make available by ${message} in request scope.
+                  request.getRequestDispatcher("IniciarSesion.jsp").forward(request, response);
+             };
            
-           if(id!=null){
-                if(tipo.equalsIgnoreCase("0")){
-                    
-                    request.setAttribute("idpostulante", id);
-                    out.print(id);
-                    //response.sendRedirect("inicio_postulante.jsp");
-                    request.getRequestDispatcher("inicio_postulante.jsp").forward(request, response);
-                }else{
-                    request.setAttribute("idempresa", id);
-                    request.getRequestDispatcher("inicio_empresa.jsp").forward(request, response);
-                }
-                
-                //out.print(tipo);
-           
-           }else{
-                //out.print(id);
-                //response.sendRedirect("IniciarSesion.jsp");
-                 request.setAttribute("message", "Datos de acceso incorrectos, intenta otra vez"); // Make available by ${message} in request scope.
-                 request.getRequestDispatcher("IniciarSesion.jsp").forward(request, response);
-            };
-        } catch (Exception ex) {
-            System.err.println(ex);
-            out.print(ex.getMessage());
         }
+     
        
     }
 

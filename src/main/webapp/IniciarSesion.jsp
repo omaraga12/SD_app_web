@@ -31,7 +31,15 @@
                 <div class="signup-content">
                     <form method="POST" action="IniciarSesion" id="signup-form" class="signup-form">
                         <h2 class="form-title">Iniciar Sesion</h2>
+                        <h3 class="form-title">Ingresar como: </h3>
+                        <div class="form-radio">
+                        <input type="radio" name="type" value="user" checked="checked" />
+                        <label for="newbie">Usuario</label>
+                        <input type="radio" name="type" value="admin"  />
+                        <label for="average">Administrador</label>
+                       
                         
+                        </div>
                         
 
                        <div class="form-group">

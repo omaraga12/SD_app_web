@@ -2,9 +2,19 @@ package CapaNegocio;
 
 import CapaDatos.conexion;
 import CapaNegocio.Entidades.EntidadEmpresa;
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.net.URL;
+import java.net.URLConnection;
 import java.sql.ResultSet;
 import java.util.ArrayList;
+import javax.json.JsonObject;
+import javax.json.stream.JsonParser;
+import javax.swing.JOptionPane;
 import javax.swing.JTable;
+import javax.swing.JTextField;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -116,5 +126,12 @@ public class Empresa extends EntidadEmpresa{
             throw new Exception(e.getMessage());
         }
     }
-    
+  
+
+ 
+        
+ 
+
+ 
+ 
 }
