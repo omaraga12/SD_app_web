@@ -36,7 +36,7 @@ public class RegistroUsuario extends HttpServlet {
         
         
         String tipoSeleccion=request.getParameter("type");
-        
+        String doc=request.getParameter("doc");
         String correo=request.getParameter("email");
         String contrasena=request.getParameter("re_password");
         int tipo=1;
@@ -58,7 +58,8 @@ public class RegistroUsuario extends HttpServlet {
                     //response.sendRedirect("inicio_postulante.jsp");
                     request.getRequestDispatcher("registroPostulante.jsp").forward(request, response);
                 }else{
-                    request.setAttribute("idempresa", idUser);
+                    request.setAttribute("iduser", idUser);
+                    request.setAttribute("ruc", doc);
                     request.getRequestDispatcher("registroEmpresa.jsp").forward(request, response);
                 }
            

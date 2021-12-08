@@ -48,11 +48,12 @@
                     <h1 class="text-primary"><center>Registro de postulante</center></h1>
                     <form action="Controler" method="POST" id="data" class = "row mt-5" enctype="multipart/form-data">
                         
-                        <p name="iduser" id="iduser" style = "display:none">${iduser}</p>
+                        
                         <div class = "col-6">
                             <div class="mb-3">
                                 <label for="inputDocumento" class="form-label">N° documento</label>
-                                <input type="text" maxlength="8" class="form-control" name="inputDocumento" required="required">                                    
+                                <input type="text" maxlength="8" class="form-control" name="inputDocumento" required="required">
+                                <input type="text" name="iduser" for="iduser" id="iduser" style = "display:none" value="${iduser}"></input>
                             </div>
                         </div>
                         <div class = "col-6">

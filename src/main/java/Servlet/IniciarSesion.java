@@ -54,8 +54,8 @@ public class IniciarSesion extends HttpServlet {
             ResultSet rpt=obj.verificarLogin(correo, contrasena);
             while(rpt.next()){
              
-                //id=rpt.getString("id_postulante_empresa");
-                id="781";
+                id=rpt.getString("id_postulante_empresa");
+                //id="781";
                 tipo=rpt.getString("tipo");
             }
             

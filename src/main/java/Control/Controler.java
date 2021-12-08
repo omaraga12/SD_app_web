@@ -74,8 +74,8 @@ public class Controler extends HttpServlet {
                             Files.copy(input, file.toPath());
                         }
                     }
-                    //String idUser=request.getParameter("iduser");
-
+                    String idUser=request.getParameter("iduser");
+                    //JOptionPane.showMessageDialog(null, idUser);
                     objP.setTipo_documento_id(request.getParameter("inputTipo").trim());
                     objP.setNumero_documento(request.getParameter("inputDocumento"));
                     objP.setApellido_paterno(request.getParameter("inputApellidoPaterno"));
@@ -97,7 +97,8 @@ public class Controler extends HttpServlet {
 
                     int idPostulante = objP.insertarPostulante();
                     Usuario objUser=new Usuario();
-                    //objUser.agregarIDPostulanteEmpresa(Integer.parseInt(idUser), idPostulante);
+                    objUser.agregarIDPostulanteEmpresa(Integer.parseInt(idUser), idPostulante);
+                    
                     request.setAttribute("id", idPostulante);
                     
                     request.getRequestDispatcher("registroIdioma.jsp").forward(request, response);

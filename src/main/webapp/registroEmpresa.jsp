@@ -46,15 +46,16 @@
 			</div>
 		</div>
 	<div class="row">
-            <form action="/RegistrarEmpresa">
+            <form action="RegistrarEmpresa">
     
             <div class="mb-3 mt-3">
                <label for="txtRuc" class="form-label">RUC:</label>
 
                    <div class="d-flex d-flex justify-content-between">
-                       <input type="number" id="ruc" name="ruc" class="form-control" style="width: 450px;"  placeholder="Ingrese el RUC de su empresa" name="txtRuc">
+                       <input type="number" id="ruc" name="ruc"  class="form-control" style="width: 450px;" value="${ruc}" placeholder="Ingrese el RUC de su empresa">
                             <button class="btn btn-primary" style="width: 150px;" onclick="obtnerDatosRuc();">SUNAT</button>
                    </div>
+               <input type="text" name="iduser" for="iduser" id="iduser" style = "display:none" value="${iduser}"></input>
              </div>
 
              <div class="mb-3">
@@ -63,10 +64,12 @@
              </div>
 
              <div class="mb-3">
-               <label for="txtNombre" class="form-label">Foto :</label>
+               <label for="inputSeleccionarImagen" class="form-label">Seleccionar logo</label>
                <div class="input-group mb-3">
-                 <input type="file" class="form-control" id="inputGroupFile02">
+                 <input class="form-control" type="file" name="inputSeleccionarImagen">
                </div>
+               
+                             
              </div>
 
             <div class="mb-3">

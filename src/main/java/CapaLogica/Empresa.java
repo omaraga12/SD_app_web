@@ -1,4 +1,4 @@
-package CapaNegocio;
+package CapaLogica;
 
 import CapaDatos.conexion;
 import CapaNegocio.Entidades.EntidadEmpresa;
@@ -25,7 +25,17 @@ public class Empresa extends EntidadEmpresa{
     conexion objC;
     String SQL;
     ResultSet rs = null;
-    
+    public static void main(String[] args) {
+               
+        try {
+            Empresa obj= new Empresa();
+            obj.insertarEmpresa("Dubbie", "SAC","10734169471","1","logo.png");
+            
+        } catch (Exception ex) {
+            System.err.println(ex);
+        }
+        
+    }
     public Empresa() {
         objC = new conexion();
     }
@@ -128,7 +138,22 @@ public class Empresa extends EntidadEmpresa{
     }
   
 
- 
+ public int insertarEmpresa(String nombre, String tipo, String ruc, String id_pais, String imagen) throws Exception {
+        try {
+            SQL = "insert into empresa(nombre_empresa, tipo_empresa, ruc, pais_pais_id, imagen) values"
+                    + "('" +nombre+ "', '" +tipo+ "', '" +ruc+ "', '" +id_pais+ "', '" +imagen+ "')";
+            objC.ejecutarBD(SQL);
+            String SQL2 = "select IDENT_CURRENT('empresa') [empresa_id]";
+            rs = objC.consultarBD(SQL2);
+            if (rs.next()) {
+                return rs.getInt(1);
+            }
+            objC.desconectarBD();
+            return -1;
+        } catch (Exception e) {
+            throw new Exception(e.getMessage());
+        }
+    }
         
  
 
