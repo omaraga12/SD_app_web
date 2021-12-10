@@ -29,7 +29,7 @@ public class Empresa extends EntidadEmpresa{
                
         try {
             Empresa obj= new Empresa();
-            obj.insertarEmpresa("Dubbie", "SAC","10734169471","1","logo.png");
+            System.err.println(obj.actualizarEmpresa("DubbieActualizado", "SAC","10734169471","1","logo.png","66"));
             
         } catch (Exception ex) {
             System.err.println(ex);
@@ -136,8 +136,26 @@ public class Empresa extends EntidadEmpresa{
             throw new Exception(e.getMessage());
         }
     }
+    
+    public ResultSet ListarEmpresa(String id) throws Exception{
+        SQL = "select nombre_empresa from Empresa where empresa_id='"+id+"'";
+        try {
+            rs=objC.consultarBD(SQL);
+            return rs;
+        } catch (Exception e) {
+            throw new Exception(e.getMessage());
+        }
+    }
   
-
+public ResultSet ListarDatosEmpresa(String id) throws Exception{
+        SQL = "select empresa_id, nombre_empresa,tipo_empresa,ruc,pais.nombre_pais,imagen from Empresa inner join pais on pais.pais_id=empresa.pais_pais_id where empresa_id='"+id+"'";
+        try {
+            rs=objC.consultarBD(SQL);
+            return rs;
+        } catch (Exception e) {
+            throw new Exception(e.getMessage());
+        }
+    }
  public int insertarEmpresa(String nombre, String tipo, String ruc, String id_pais, String imagen) throws Exception {
         try {
             SQL = "insert into empresa(nombre_empresa, tipo_empresa, ruc, pais_pais_id, imagen) values"
@@ -156,7 +174,20 @@ public class Empresa extends EntidadEmpresa{
     }
         
  
-
+ public int actualizarEmpresa(String nombre, String tipo, String ruc, String id_pais, String imagen, String idEmpresa) throws Exception {
+     int rpt=-1;   
+     try {
+            SQL = "update empresa set nombre_empresa='"+nombre+"', tipo_empresa='"+tipo+"', ruc='"+ruc+"', pais_pais_id='"+id_pais+"', imagen='"+imagen+"' where empresa_id='"+idEmpresa+"'";
+            objC.ejecutarBD(SQL);
+            rpt= 1;
+            objC.desconectarBD();
+            
+        } catch (Exception e) {
+            
+            System.err.println(e.getMessage());
+        }
+       return rpt;
+    }
  
  
 }

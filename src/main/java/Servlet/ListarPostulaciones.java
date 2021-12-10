@@ -4,30 +4,20 @@
  */
 package Servlet;
 
-import CapaLogica.Empresa;
-import CapaLogica.Usuario;
-import CapaNegocio.Pais;
-import java.io.File;
+import CapaLogica.Trabajo;
 import java.io.IOException;
-import java.io.InputStream;
 import java.io.PrintWriter;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.Part;
 import javax.swing.JOptionPane;
 
 /**
  *
  * @author DELL
  */
-public class RegistrarEmpresa extends HttpServlet {
+public class ListarPostulaciones extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -44,37 +34,19 @@ public class RegistrarEmpresa extends HttpServlet {
             response.setContentType("text/html;charset=UTF-8");
             
             PrintWriter out = response.getWriter();
-             //Foto
-//             String ruta = request.getServletContext().getRealPath("images/");
-//             String cambio = ruta.replace("SD_app_web\\target\\SD_app_web-1.0-SNAPSHOT", "SD_app_web\\src\\main\\webapp");
-//             File uploads = new File(cambio);
-//             Part part = request.getPart("inputSeleccionarImagen");
-//             
-//             Path path = Paths.get(part.getSubmittedFileName());
-//             String fileName = path.getFileName().toString();
-//             InputStream input = part.getInputStream();
-//                    
-//                    if (input != null) {
-//                        File file = new File(uploads, fileName);
-//                        if (!Files.exists(file.toPath())) {
-//                            Files.copy(input, file.toPath());
-//                        }
-//                    }
+
             
-            String ruc=request.getParameter("ruc");
+            String idtrabajo=request.getParameter("id_trabajo").trim();
             
-            String nombre=request.getParameter("nombre");
-            String tipo=request.getParameter("tipo");
-            String pais=request.getParameter("pais").trim();
-            String idUser=request.getParameter("iduser");
-            Empresa obj=new Empresa();
-         
-              int idEmpresa=obj.insertarEmpresa(nombre.toUpperCase().toUpperCase(), tipo,ruc,pais,"logo.png");
-              Usuario objUser=new Usuario();
-              objUser.agregarIDPostulanteEmpresa(Integer.parseInt(idUser), idEmpresa);
-              request.setAttribute("idempresa", idEmpresa);
-              request.getRequestDispatcher("inicio_empresa.jsp").forward(request, response);
-             
+            String nombreTrabajo=request.getParameter("nombre");
+              
+
+                
+                request.setAttribute("trabajo_id", idtrabajo);
+                request.setAttribute("nombre", nombreTrabajo);
+                //out.print(idtrabajo);
+                request.getRequestDispatcher("ListarPostulantesPorTrabajo.jsp").forward(request, response);
+//            }  
              
             
         } catch (Exception ex) {

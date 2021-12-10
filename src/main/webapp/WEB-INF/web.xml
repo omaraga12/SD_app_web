@@ -16,6 +16,22 @@
         <servlet-name>RegistrarEmpresa</servlet-name>
         <servlet-class>Servlet.RegistrarEmpresa</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>ModificarEmpresa</servlet-name>
+        <servlet-class>Servlet.ModificarEmpresa</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>RegistrarTrabajo</servlet-name>
+        <servlet-class>Servlet.RegistrarTrabajo</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>ActualizarTrabajo</servlet-name>
+        <servlet-class>Servlet.ActualizarTrabajo</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>ListarPostulaciones</servlet-name>
+        <servlet-class>Servlet.ListarPostulaciones</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>InicioSesion</servlet-name>
         <url-pattern>/InicioSesion</url-pattern>
@@ -31,6 +47,22 @@
     <servlet-mapping>
         <servlet-name>RegistrarEmpresa</servlet-name>
         <url-pattern>/RegistrarEmpresa</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ModificarEmpresa</servlet-name>
+        <url-pattern>/ModificarEmpresa</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>RegistrarTrabajo</servlet-name>
+        <url-pattern>/RegistrarTrabajo</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ActualizarTrabajo</servlet-name>
+        <url-pattern>/ActualizarTrabajo</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ListarPostulaciones</servlet-name>
+        <url-pattern>/ListarPostulaciones</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

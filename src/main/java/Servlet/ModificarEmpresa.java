@@ -6,28 +6,19 @@ package Servlet;
 
 import CapaLogica.Empresa;
 import CapaLogica.Usuario;
-import CapaNegocio.Pais;
-import java.io.File;
 import java.io.IOException;
-import java.io.InputStream;
 import java.io.PrintWriter;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.Part;
 import javax.swing.JOptionPane;
 
 /**
  *
  * @author DELL
  */
-public class RegistrarEmpresa extends HttpServlet {
+public class ModificarEmpresa extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -66,12 +57,11 @@ public class RegistrarEmpresa extends HttpServlet {
             String nombre=request.getParameter("nombre");
             String tipo=request.getParameter("tipo");
             String pais=request.getParameter("pais").trim();
-            String idUser=request.getParameter("iduser");
+            String idEmpresa=request.getParameter("idempresa");
             Empresa obj=new Empresa();
          
-              int idEmpresa=obj.insertarEmpresa(nombre.toUpperCase().toUpperCase(), tipo,ruc,pais,"logo.png");
-              Usuario objUser=new Usuario();
-              objUser.agregarIDPostulanteEmpresa(Integer.parseInt(idUser), idEmpresa);
+              obj.actualizarEmpresa(nombre.toUpperCase().toUpperCase(), tipo,ruc,pais,"logo.png",idEmpresa);
+              
               request.setAttribute("idempresa", idEmpresa);
               request.getRequestDispatcher("inicio_empresa.jsp").forward(request, response);
              
@@ -80,6 +70,7 @@ public class RegistrarEmpresa extends HttpServlet {
         } catch (Exception ex) {
             JOptionPane.showMessageDialog(null, ex);
         }
+        
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

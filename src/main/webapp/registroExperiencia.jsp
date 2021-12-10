@@ -4,9 +4,10 @@
     Author     : Rodrigo Ruidias
 --%>
 
+<%@page import="CapaLogica.Empresa"%>
 <%@page import="CapaNegocio.Entidades.EntidadEmpresa"%>
 <%@page import="java.util.ArrayList"%>
-<%@page import="CapaNegocio.Empresa"%>
+
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
